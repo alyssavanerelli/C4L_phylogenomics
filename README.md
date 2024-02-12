@@ -8,8 +8,6 @@
     - results from busco run
   - `phy_input/`
     - some of the busco results will be moved here as input for busco_phylogenomics
-  - `phy_output/`
-    - directory where output from busco_phylogenomics will go
   - `slurmout/`
     - where slurm output files will go
 
