@@ -27,11 +27,11 @@ conda activate busco # make sure that the environment installed properly
 
 ## Download genomes
 - Next, we will download 5 fly genomes from NCBI
-- [Drosophila ananassae](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_017639315.1/)
-- [Drosophila miranda](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_003369915.1/)
-- [Drosophila albomicans](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_009650485.2/)
-- [Drosophila innubila](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_004354385.1/)
-- [Drosophila simulans](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_016746395.2/)
+- [_Drosophila ananassae_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_017639315.1/)
+- [_Drosophila miranda_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_003369915.1/)
+- [_Drosophila albomicans_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_009650485.2/)
+- [_Drosophila innubila_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_004354385.1/)
+- [_Drosophila simulans_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_016746395.2/)
 
 To download these genomes onto amarel, we will use `curl` commands from the NCBI website
 ```
@@ -43,7 +43,9 @@ curl -OJX GET [command copied from NCBI]
 
 Once you have downloaded each genome, unzip the downloaded folder and the genome will be the `.fna` file within `ncbi_dataset/data/[GCA#######_specific to species]`
 
-Then we can rename these genomes and delete the files we don't need (typical genome naming is the first 3 letters of the genus followed by the first three letters of the specific epithet `Drosophila ananassae = DroAna.fa`)
+Then we can rename these genomes and delete the files we don't need 
+
+Typical genome naming is the first 3 letters of the genus followed by the first three letters of the specific epithet `Drosophila ananassae = DroAna.fa`
 ```
 unzip ncbi_dataset.zip
 
@@ -66,13 +68,73 @@ rm -R ncbi_dataset
 
 [busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/tree/main)
 
+**You will need to do some editing of this loop file:**
+- The cut command (`cut -d "/" -f 10`) at the end of the `ls -1` line will need to be altered so that running this line (from `ls -1` to `sort`) will output the genome names only (e.g. `DroAna.fa`, etc.)
+- You should edit the number to remove more or less "/"
+  ```
+  # example use
+  /projects/f_geneva_1/alyssa/grahami/busco/busco_phylogenomics/genomes/new/*.fa | cut -d "/" -f 10 | sort
+  # this will produce only the genome file names without the path
+  ```
+
 [run_busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/run_busco.sh)
 
 **run commands**
+- Once you have edited the file, you can uncomment the `eval $CMD` line so the script will submit our `busco.sh` script
+- I like to run the script with `echo $CMD` uncommented and the `eval $CMD` commented out first to make sure that it is submitting the `busco.sh` script correctly
+
 ```
-chmod 755 run_busco.sh
+chmod 755 run_busco.sh       # makes this an executable file
 ./run_busco.sh
 ```
+
+---
+
+## Running busco_phylogenomics
+- Now that we have downloaded the genomes and run busco on all of them, we can perform phylogenetic analyses with busco_phylogenomics
+- First, we need to rename and move our busco results to our `phy_input/` folder to be in the format that busco_phylogenomics needs
+- What we need to do here is to extract the `run_diptera_odb10/` folder for each species and put it in the format of `run_[species]/`
+
+[move.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/move.sh)
+
+**This loop file should be almost identical to your `run_busco.sh` file**
+- You will just need to change the `CMD=` line to be submitting the `move.sh` script instead of the `busco.sh` script
+
+[run_move.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/run_move.sh)
+
+```
+chmod 755 run_busco.sh       # makes this an executable file
+./run_move.sh
+```
+
+**Now we can run busco_phylogenomics**
+- This program is a python file found [here](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/BUSCO_phylogenomics.py)
+- Required parameters
+  - `-d --directory`: input directory containing BUSCO runs
+  - `-o --output`: output directory
+  - `-t --threads`: number of threads to use
+  - `--supermatrix` and/or `--supertree`: choose to run supermatrix and/or supertree methods
+- Optional parameters:
+  - `-psc`: BUSCO families that are present and single-copy in N% of species will be included in supermatrix analysis (default = 100%). Families that are missing for a species will be replaced with missing characters ("?")
+  - `--stop_early`: stop pipeline early before phylogenetic inference (i.e., for the supermatrix approach this will stop after generating the concatenated alignment)
+  - Do **NOT** make the output directory before running the script. The script will make this directory, you just need to name it in the script.
+- We are going to be running this program in `supermatrix` mode where all the genes are analyzed together as one alignment file
+- We are also going to be using genes that are present in at least 75% of species so we will be using the `-psc 75` flag
+
+[phy_sub.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/tree/main)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
