@@ -3,6 +3,7 @@
 **Directory Structure**
 - `busco/`
   - _`phy_sub.sh`_
+  - _`BUSCO_phylogenomics.py`_
   - `genomes/`
     - downloaded genome fasta files
   - `busco_out/`
