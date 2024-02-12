@@ -32,6 +32,7 @@ conda activate busco # make sure that the environment installed properly
 - [_Drosophila albomicans_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_009650485.2/)
 - [_Drosophila innubila_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_004354385.1/)
 - [_Drosophila simulans_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_016746395.2/)
+- **Outgroup:**[_Ephydra gracilis_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_001014675.1/)
 
 To download these genomes onto amarel, we will use `curl` commands from the NCBI website
 ```
@@ -128,7 +129,8 @@ chmod 755 run_busco.sh       # makes this an executable file
 ## Visualizing Output
 - busco_phylogenomics will produce many output files
 - In the `.iqtree` file, we will have the logs and an unrooted maximum likelihood tree
-- The preferred method to view these trees is either to save the `SUPERMATRIX.aln.treefile` file (this file is a representation of the phylogeny in Newick format) and either open it in the software [FigTree](http://tree.bio.ed.ac.uk/software/figtree/) or using the online tree viewer [iTOL](https://itol.embl.de/upload.cgi) (you can either upload the file or just copy and paste it into the tree text box)
+- The preferred method to view this tree is to save the `SUPERMATRIX.aln.treefile` file (this file is a representation of the phylogeny in Newick format) and open it in the software [FigTree](http://tree.bio.ed.ac.uk/software/figtree/)
+- In FigTree, you will click on the `Ephydra gracilis` branch and reroot with this lineage
 
 
 
