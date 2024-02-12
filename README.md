@@ -2,9 +2,11 @@
 
 **Directory Structure**
 - `busco/`
+  - _`phy_sub.sh`_
   - `genomes/`
     - downloaded genome fasta files
   - `busco_out/`
+    - _`busco.sh`_
     - results from busco run
   - `phy_input/`
     - some of the busco results will be moved here as input for busco_phylogenomics
