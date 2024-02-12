@@ -59,9 +59,20 @@ rm -R ncbi_dataset
 
 ## Run BUSCO on all downloaded genomes
 - You will need to edit these slurm files to be specific to your paths
+- Wherever this `busco.sh` script is, the output files will be written so make sure to write these files into your `busco_out/`
+- We will write a `busco.sh` script with the specific busco commands
+- We will also write a `run_busco.sh` loop script to loop through all of our genome files automatically
+- We will be using the `diptera_odb10` busco dataset, which will be downloaded from the busco online database
 
-[busco.sh]()
+[busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/tree/main)
 
+[run_busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/run_busco.sh)
+
+**run commands**
+```
+chmod 755 run_busco.sh
+./run_busco.sh
+```
 
 
 
