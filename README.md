@@ -69,7 +69,7 @@ rm README.md
 - We will also write a `run_busco.sh` loop script to loop through all of our genome files automatically
 - We will be using the `diptera_odb10` busco dataset, which will be downloaded from the busco online database
 
-[busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/tree/main)
+[busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/busco.sh)
 
 **You will need to do some editing of this loop file:**
 - The cut command (`cut -d "/" -f 10`) at the end of the `ls -1` line will need to be altered so that running this line (from `ls -1` to `sort`) will output the genome names only (e.g. `DroAna.fa`, etc.)
