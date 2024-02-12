@@ -121,9 +121,14 @@ chmod 755 run_busco.sh       # makes this an executable file
 - We are going to be running this program in `supermatrix` mode where all the genes are analyzed together as one alignment file
 - We are also going to be using genes that are present in at least 75% of species so we will be using the `-psc 75` flag
 
-[phy_sub.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/tree/main)
+[phy_sub.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/phy_sub.sh)
 
+---
 
+## Visualizing Output
+- busco_phylogenomics will produce many output files
+- In the `.iqtree` file, we will have the logs and an unrooted maximum likelihood tree
+- The preferred method to view these trees is either to save the `SUPERMATRIX.aln.treefile` file (this file is a representation of the phylogeny in Newick format) and either open it in the software [FigTree](http://tree.bio.ed.ac.uk/software/figtree/) or using the online tree viewer [iTOL](https://itol.embl.de/upload.cgi) (you can either upload the file or just copy and paste it into the tree text box)
 
 
 
