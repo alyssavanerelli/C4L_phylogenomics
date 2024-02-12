@@ -57,6 +57,7 @@ mv ncbi_dataset/data/GCF_017639315.1/GCF_017639315.1_ASM1763931v2_genomic.fna Dr
 # delete extra files
 rm ncbi_dataset.zip
 rm -R ncbi_dataset
+rm README.md
 ```
 
 ---
