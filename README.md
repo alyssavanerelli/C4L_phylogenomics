@@ -91,6 +91,14 @@ chmod 755 run_busco.sh       # makes this an executable file
 ./run_busco.sh
 ```
 
+**Troubleshooting**
+Sometimes when running busco, the lineage files will not download properly and this will cause your busco run to fail. If this happens, just re-submitting the busco job should solve the problem as busco will re-try to download the lineage files.
+
+If this does not work, you can try downloading the lineage file manually with this command
+```
+busco download diptera_odb10
+```
+
 ---
 
 ## Running busco_phylogenomics
