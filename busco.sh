@@ -3,7 +3,7 @@
 #SBATCH --exclude=gpuc001,gpuc002
 #SBATCH --job-name=busco
 #SBATCH --output=[YOUR PATH HERE]/busco/slurmout/slurm-%j-%x.out
-#SBATCH --mem=8G
+#SBATCH --mem=10G
 #SBATCH -n 16
 #SBATCH -N 1
 #SBATCH --time=3-00:00:00
