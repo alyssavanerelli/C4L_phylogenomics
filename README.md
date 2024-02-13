@@ -121,7 +121,7 @@ In each `short_summary...txt` file, you will find the completeness scores for th
 [run_move.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/run_move.sh)
 
 ```
-chmod 755 run_busco.sh       # makes this an executable file
+chmod 755 run_move.sh       # makes this an executable file
 ./run_move.sh
 ```
 
