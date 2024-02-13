@@ -17,7 +17,7 @@
 ## Create conda environment
 - First we will need to make a conda environment to run `busco` and `busco_phylogenomics`
 - To do this you will make an environment using the provided [`busco.yml`](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/busco.yml) file
-- If you have never used conda before, there will be some initial steps that you can follow [here](https://github.com/lizardroom/conda_on_amarel/)
+- If you have never used conda on amarel before, there will be some initial steps that you will need to follow [here](https://github.com/lizardroom/conda_on_amarel/)
 
 ```
 conda env create -f busco.yml
@@ -91,7 +91,7 @@ chmod 755 run_busco.sh       # makes this an executable file
 ./run_busco.sh
 ```
 
-**Troubleshooting**
+### Troubleshooting
 Sometimes when running busco, the lineage files will not download properly and this will cause your busco run to fail. If this happens, just re-submitting the busco job should solve the problem as busco will re-try to download the lineage files.
 
 If this does not work, you can try downloading the lineage file manually with this command
