@@ -68,6 +68,7 @@ rm README.md
 - We will write a `busco.sh` script with the specific busco commands
 - We will also write a `run_busco.sh` loop script to loop through all of our genome files automatically
 - We will be using the `diptera_odb10` busco dataset, which will be downloaded from the busco online database
+- This step only took ~10 minutes per genome
 
 [busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/busco.sh)
 
