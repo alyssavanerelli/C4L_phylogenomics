@@ -104,9 +104,7 @@ busco download diptera_odb10
 ### BUSCO completeness results
 In each `short_summary...txt` file, you will find the completeness scores for that genome assembly. They should match the graph below.
 
-#![Image](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/busco_results.pdf)
-
-xfun::embed_file("busco_results.pdf")
+[BUSCO results figure](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/busco_results.pdf)
 
 ---
 
