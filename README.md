@@ -68,7 +68,8 @@ rm README.md
 - We will write a `busco.sh` script with the specific busco commands
 - We will also write a `run_busco.sh` loop script to loop through all of our genome files automatically
 - We will be using the `diptera_odb10` busco dataset, which will be downloaded from the busco online database
-- This step only took ~10 minutes per genome
+- This step should take 10-20 minutes per genome
+- You will know that busco completed successfully if in the output folder, a `short_summary...txt` file is created
 
 [busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/busco.sh)
 
@@ -99,6 +100,9 @@ If this does not work, you can try downloading the lineage file manually with th
 ```
 busco download diptera_odb10
 ```
+
+### BUSCO completeness results
+In each `short_summary...txt` file, you will find the completeness scores for that genome assembly. They should match the graph below.
 
 ---
 
