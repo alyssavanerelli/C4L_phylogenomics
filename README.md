@@ -148,30 +148,31 @@ chmod 755 run_move.sh       # makes this an executable file
 - busco_phylogenomics will produce many output files
 - In the `.iqtree` file, we will have the logs and an unrooted maximum likelihood tree
 
-1. Save the `SUPERMATRIX.aln.treefile` file
+**1. Save the `SUPERMATRIX.aln.treefile` file**
 - this file is a representation of the phylogeny in Newick format
 - copy the contents of this file and saving it as a `.tre` file onto your computer
 
-2. Download FigTree
+**2. Download FigTree**
 - This is the software we will be using to visualize the phylogeny
 - You can download FigTree [here](http://tree.bio.ed.ac.uk/software/figtree/)
 
-3. Open the `.tre` file in FigTree
+**3. Open the `.tre` file in FigTree**
 - Once opening the tree, FigTree will ask what you want the nodes/branches labeled as. You should write **bootstrap**
 
-4. Reroot the tree using our outgroup
+**4. Reroot the tree using our outgroup**
 - You should click on the branch leading to **_Ephydra gracilis_** and reroot with this lineage using the `reroot` button at the top of the screen
 
-5. Display support values
+**5. Display support values**
 - We will also want to display the bootstrap support values on the nodes
 - Click the checkbox next to `Node Labels` on the left
 - Change the dropdown `Display` to `Bootstrap`
 
-6. Optional aesthetic changes
+**6. Optional aesthetic changes**
 - FigTree has many different aesthetic changes that you can make (e.g. font size, root length, etc.) so feel free to play around with these options if you would like
 
-7. Save your tree
+**7. Save your tree**
 - Click `File` and `Export PDF` to save your tree
+
 
 **Your tree should look like the tree below**
 
