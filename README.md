@@ -96,11 +96,6 @@ chmod 755 run_busco.sh       # makes this an executable file
 ### Troubleshooting
 Sometimes when running busco, the lineage files will not download properly and this will cause your busco run to fail. If this happens, just re-submitting the busco job should solve the problem as busco will re-try to download the lineage files.
 
-If this does not work, you can try downloading the lineage file manually with this command
-```
-busco download diptera_odb10
-```
-
 ### BUSCO completeness results
 In each `short_summary...txt` file, you will find the completeness scores for that genome assembly. They should match the graph below.
 
