@@ -121,7 +121,7 @@ chmod 755 run_move.sh       # makes this an executable file
 ```
 
 **Now we can run busco_phylogenomics**
-- This program is a python file found [here](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/BUSCO_phylogenomics.py)
+- This program is a python file found [here](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/BUSCO_Phylogenomics.py)
 - Required parameters
   - `-d --directory`: input directory containing BUSCO runs
   - `-o --output`: output directory
