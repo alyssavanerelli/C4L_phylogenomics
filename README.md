@@ -27,7 +27,7 @@ conda activate busco # make sure that the environment installed properly
 ---
 
 ## Download genomes
-- Next, we will download 5 fly genomes from NCBI
+- Next, we will download 6 genomes from NCBI
 - [_Drosophila ananassae_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_017639315.1/)
 - [_Drosophila miranda_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_003369915.1/)
 - [_Drosophila albomicans_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_009650485.2/)
