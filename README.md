@@ -112,7 +112,6 @@ In each `short_summary...txt` file, you will find the completeness scores for th
 - Now that we have downloaded the genomes and run busco on all of them, we can perform phylogenetic analyses with busco_phylogenomics
 - First, we need to rename and move our busco results to our `phy_input/` folder to be in the format that busco_phylogenomics needs
 - What we need to do here is to extract the `run_diptera_odb10/` folder for each species and put it in the format of `run_[species]/`
-- This step should take ~18 hours to finish 
 
 [move.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/move.sh)
 
@@ -139,6 +138,7 @@ chmod 755 run_move.sh       # makes this an executable file
   - Do **NOT** make the output directory before running the script. The script will make this directory, you just need to name it in the script.
 - We are going to be running this program in `supermatrix` mode where all the genes are analyzed together as one alignment file
 - We are also going to be using genes that are present in at least 75% of species so we will be using the `-psc 75` flag
+- This step should take ~18 hours to finish 
 
 [phy_sub.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/phy_sub.sh)
 
