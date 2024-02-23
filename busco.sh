@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --partition=main
 #SBATCH --exclude=gpuc001,gpuc002
-#SBATCH --job-name=busco
+#SBATCH --job-name=busco_$1
 #SBATCH --output=[YOUR PATH HERE]/busco/slurmout/slurm-%j-%x.out
 #SBATCH --mem=10G
 #SBATCH -n 16
