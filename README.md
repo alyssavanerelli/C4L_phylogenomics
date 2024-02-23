@@ -35,12 +35,20 @@ conda activate busco # make sure that the environment installed properly
 - [_Drosophila simulans_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_016746395.2/)
 - **Outgroup:** [_Ephydra gracilis_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_001014675.1/)
 
-To download these genomes onto amarel, we will use `curl` commands from the NCBI website
+To download these genomes onto amarel, we will use `curl` commands from the NCBI website. To get the commands, click on the `curl` button.
 ```
 # example commands
 cd busco/genomes/
 
 curl -OJX GET [command copied from NCBI]
+
+# commands for these genomes
+curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_017639315.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
+curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_003369915.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
+curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_009650485.2/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
+curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_004354385.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
+curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_016746395.2/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
+curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCA_001014675.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
 ```
 
 Once you have downloaded each genome, unzip the downloaded folder and the genome will be the `.fna` file within `ncbi_dataset/data/[GCA#######_specific to species]`
@@ -63,8 +71,9 @@ rm README.md
 ---
 
 ## Run BUSCO on all downloaded genomes
+- Now we will be running the `busco.sh` script linked below
 - You will need to edit these slurm files to be specific to your paths
-- Wherever this `busco.sh` script is, the output files will be written so make sure to write these files into your `busco_out/`
+- The busco output files will be written to wherever you have this `busco.sh` script saved so make sure to save (and run) this script in your `busco_out/`
 - We will write a `busco.sh` script with the specific busco commands
 - We will also write a `run_busco.sh` loop script to loop through all of our genome files automatically
 - We will be using the `diptera_odb10` busco dataset, which will be downloaded from the busco online database
@@ -74,8 +83,8 @@ rm README.md
 [busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/busco.sh)
 
 **You will need to do some editing of this loop file:**
-- The cut command (`cut -d "/" -f 10`) at the end of the `ls -1` line will need to be altered so that running this line (from `ls -1` to `sort`) will output the genome names only (e.g. `DroAna.fa`, etc.)
-- You should edit the number to remove more or less "/"
+- The cut command (`cut -d "/" -f 10`) at the end of the `ls -1` line will need to be altered so that running this line (from `ls -1` to `sort`) will **output the genome names only** (e.g. `DroAna.fa`, etc.)
+- **You will need to edit the number** to remove more or less "/" to be specific to your path
   ```
   # example use
   /projects/f_geneva_1/alyssa/grahami/busco/busco_phylogenomics/genomes/new/*.fa | cut -d "/" -f 10 | sort
@@ -94,7 +103,17 @@ chmod 755 run_busco.sh       # makes this an executable file
 ```
 
 ### Troubleshooting
-Sometimes when running busco, the lineage files will not download properly and this will cause your busco run to fail. If this happens, just re-submitting the busco job should solve the problem as busco will re-try to download the lineage files.
+Sometimes when running busco, the lineage files will not download properly and this will cause your busco run to fail. If this happens, just re-submitting the busco job should solve the problem as busco will re-try to download the lineage files. Before resubmitting, you need to **delete any output folders made from the previous run**.
+
+If simply resubmitting the job doesn't work you can do one of the options below:
+1. If the dataset has successfully downloaded for one of the other jobs, you can change the `-l` argument in your busco command to `-l /my/own/path/diptera_odb10`. This will force busco to use the already downloaded dataset and will prevent the program from trying to connect to the busco server and download the files again
+2. Again if the datset has successfully downloaded for one of the other jobs, you can leave the `-l` argument as `-l diptera_odb10` and add `--offline` to your busco command. This will prevent busco from connecting to the server and trying to download the files and will force the program to use the already downloaded files.
+3. If the dataset did not download properly for any jobs after resubmitting, then you can manually download the dataset using the commands below. Then follow either one of the options above.
+   ```
+   cd busco_out/
+   srun --partition=cmain --mem=10G --time=2:00:00 --ntasks-per-node=10 --pty bash
+   busco download diptera_odb10
+   ```
 
 ### BUSCO completeness results
 In each `short_summary...txt` file, you will find the completeness scores for that genome assembly. They should match the graph below.
