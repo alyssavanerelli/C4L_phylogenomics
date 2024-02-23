@@ -40,8 +40,6 @@ To download these genomes onto amarel, we will use `curl` commands from the NCBI
 # example commands
 cd busco/genomes/
 
-curl -OJX GET [command copied from NCBI]
-
 # commands for these genomes
 curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_017639315.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
 curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_003369915.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
