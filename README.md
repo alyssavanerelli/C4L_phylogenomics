@@ -54,6 +54,8 @@ Once you have downloaded each genome, unzip the downloaded folder and the genome
 Then we can rename these genomes and delete the files we don't need 
 
 Typical genome naming is the first 3 letters of the genus followed by the first three letters of the specific epithet `Drosophila ananassae = DroAna.fa`
+
+A user would download genomes specific to their tree and rename them accordingly. Below is an example of using a move command to rename a genome downloaded.
 ```
 unzip ncbi_dataset.zip
 
