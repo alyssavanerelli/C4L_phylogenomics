@@ -35,7 +35,9 @@ conda activate busco # make sure that the environment installed properly
 - [_Drosophila simulans_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_016746395.2/)
 - **Outgroup:** [_Ephydra gracilis_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_001014675.1/)
 
-To download these genomes onto amarel, we will use `curl` commands from the NCBI website. To get the commands, click on the `curl` button.
+To download these genomes onto amarel, we will use `curl` commands from the NCBI website. To get the commands, click on the `curl` button (I have written them out below for each of the genomes we are using).
+
+**IMPORTANT:** The order in which you complete the commands below matters. For each genome, you will need to download via the curl command below, rename the genome file, and then delete the extra files. Then move on to the next genome.
 ```
 # example commands
 cd busco/genomes/
@@ -49,9 +51,9 @@ curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF
 curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCA_001014675.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
 ```
 
-Once you have downloaded each genome, unzip the downloaded folder and the genome will be the `.fna` file within `ncbi_dataset/data/[GCA#######_specific to species]`
+Once you have downloaded the genome, unzip the downloaded folder and the genome will be the `.fna` file within `ncbi_dataset/data/[GCA#######_specific to species]`
 
-Then we can rename these genomes and delete the files we don't need 
+Then we can rename these genomes and delete the files we don't need.
 
 Typical genome naming is the first 3 letters of the genus followed by the first three letters of the specific epithet `Drosophila ananassae = DroAna.fa`
 
