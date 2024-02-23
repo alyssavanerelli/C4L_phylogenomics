@@ -26,6 +26,41 @@ conda activate busco # make sure that the environment installed properly
 
 ---
 
+## Download dependencies for busco_phylogenomics
+- [trimAl](http://trimal.cgenomics.org/)
+  - we will be using version 1.2
+    ```
+    cd
+    # FOR LINUX OR MACOS
+    wget http://trimal.cgenomics.org/_media/trimal.v1.2rev59.tar.gz
+
+    # FOR WINDOWS
+    wget http://trimal.cgenomics.org/_media/trimal.v1.2rev59.zip
+    
+    gunzip trimal.v1.2rev59.tar.gz
+    tar -xvf trimal.v1.2rev59.tar
+  
+    # compile package
+    cd trimAl/source
+    make
+  
+    # move programs to bin/
+    mv readal trimal bin/
+    ```
+- [MUSCLE](https://www.drive5.com/muscle/)
+  - download links [here](https://github.com/rcedgar/muscle/releases/tag/v5.0.1428)
+  - we will be using version 3
+    ```
+    cd
+    wget https://github.com/rcedgar/muscle/releases/download/v5.0.1428/muscle_v5.0.1428_linux
+
+    mv muscle_v5.0.1428_linux muscle
+    chmod 755 muscle
+    mv muscle bin/
+    ```
+
+---
+
 ## Download genomes
 - Next, we will download 6 genomes from NCBI
 - [_Drosophila ananassae_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_017639315.1/)
