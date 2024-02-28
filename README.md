@@ -78,12 +78,12 @@ To download these genomes onto amarel, we will use `curl` commands from the NCBI
 cd busco/genomes/
 
 # commands for these genomes
-curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_017639315.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
-curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_003369915.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
-curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_009650485.2/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
-curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_004354385.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
-curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_016746395.2/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
-curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCA_001014675.1/download?include_annotation_type=GENOME_FASTA,GENOME_GFF,RNA_FASTA,CDS_FASTA,PROT_FASTA,SEQUENCE_REPORT
+curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_017639315.1/download?include_annotation_type=GENOME_FASTA
+curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_003369915.1/download?include_annotation_type=GENOME_FASTA
+curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_009650485.2/download?include_annotation_type=GENOME_FASTA
+curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_004354385.1/download?include_annotation_type=GENOME_FASTA
+curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_016746395.2/download?include_annotation_type=GENOME_FASTA
+curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCA_001014675.1/download?include_annotation_type=GENOME_FASTA
 ```
 
 Once you have downloaded the genome, unzip the downloaded folder and the genome will be the `.fna` file within `ncbi_dataset/data/[GCA#######_specific to species]`
