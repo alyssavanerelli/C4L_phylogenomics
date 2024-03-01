@@ -121,13 +121,22 @@ rm README.md
 [busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/busco.sh)
 
 **You will need to do some editing of this loop file:**
-- The cut command (`cut -d "/" -f 10`) at the end of the `ls -1` line will need to be altered so that running this line (from `ls -1` to `sort`) will **output the genome names only** (e.g. `DroAna.fa`, etc.)
-- **You will need to edit the number** to remove more or less "/" to be specific to your path
+- The `FILES=$(ls -1 [YOUR PATH HERE]/busco/genomes/*.fa | cut -d "/" -f 10 | sort)` line in this script will produce **output the genome names only**. For example, the output should look like:
   ```
-  # example use
-  /projects/f_geneva_1/alyssa/grahami/busco/busco_phylogenomics/genomes/new/*.fa | cut -d "/" -f 10 | sort
-  # this will produce only the genome file names without the path
+  # running this line from the command line
+  ls -1 /projects/f_geneva_1/alyssa/grahami/busco/test/genomes/*.fa | cut -d "/" -f 9 | sort
+
+  # will produce this output
+  DroAlb.fa
+  DroAna.fa
+  DroInn.fa
+  DroMir.fa
+  DroSim.fa
+  EphGra.fa
   ```
+- The cut command at the end of this line will be removing information from the path of the file to only keep the genome name. **You will need to alter this line to be specific to your file path**.
+- For my path, I needed to cut after 9 instances of "/" to only leave the file name. Your number will likely be different.
+- You can run this `ls -1 [YOUR PATH HERE]/busco/genomes/*.fa | cut -d "/" -f 10 | sort` line in your terminal and **change the number after `-f`** to determine where you will need to cut to leave only the genome names.
 
 [run_busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/run_busco.sh)
 
