@@ -52,11 +52,12 @@ conda activate busco # make sure that the environment installed properly
   - we will be using version 3
     ```
     cd
-    wget https://github.com/rcedgar/muscle/releases/download/v5.0.1428/muscle_v5.0.1428_linux
+    wget https://drive5.com/muscle/downloads3.8.31/muscle3.8.31_i86linux32.tar.gz
 
-    mv muscle_v5.0.1428_linux muscle
-    chmod 755 muscle
-    mv muscle bin/
+    gunzip muscle3.8.31_i86linux32.tar.gz
+    tar -xvf muscle3.8.31_i86linux32.tar
+
+    mv muscle3.8.31_i86linux32 bin/muscle
     ```
 
 ---
