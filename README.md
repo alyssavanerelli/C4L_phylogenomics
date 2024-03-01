@@ -154,7 +154,7 @@ If simply resubmitting the job doesn't work you can do one of the options below:
    ```
 
 ### BUSCO completeness results
-In each `short_summary...txt` file, you will find the completeness scores for that genome assembly. They should match the graph below.
+In each `short_summary...txt` file, you will find the completeness scores for that genome assembly. They should match the graph below (the graph below will not be produced with the busco code but the numbers should match).
 
 [BUSCO results figure](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/busco_results.pdf)
 
