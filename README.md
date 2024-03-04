@@ -71,7 +71,7 @@ conda activate busco # make sure that the environment installed properly
 - [_Drosophila simulans_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_016746395.2/)
 - **Outgroup:** [_Ephydra gracilis_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_001014675.1/)
 
-**To download: **
+**To download:**
 - You can download a genome from NCBI using the script below
 - On the genome NCBI page, you should press the `curl` button and copy the link to download the genome (I have provided the links below for you)
 - The script below will download the genome, rename it, and delete the unneeded files.
