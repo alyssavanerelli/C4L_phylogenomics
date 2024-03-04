@@ -71,56 +71,79 @@ conda activate busco # make sure that the environment installed properly
 - [_Drosophila simulans_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_016746395.2/)
 - **Outgroup:** [_Ephydra gracilis_](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_001014675.1/)
 
-To download these genomes onto amarel, we will use `curl` commands from the NCBI website. To get the commands, click on the `curl` button (I have written them out below for each of the genomes we are using).
+**To download: **
+- You can download a genome from NCBI using the script below
+- On the genome NCBI page, you should press the `curl` button and copy the link to download the genome (I have provided the links below for you)
+- The script below will download the genome, rename it, and delete the unneeded files.
+- Typical genome naming is the first 3 letters of the genus followed by the first three letters of the specific epithet
+- To run this script, you will need to **add the path to the directory where you want**
+- This URL is the only thing you need to input for this script
+- You should **run this script from the directory where you want the genome saved**
 
-**IMPORTANT:** The order in which you complete the commands below matters. For each genome, you will need to download via the curl command below, rename the genome file, and then delete the extra files. Then move on to the next genome.
+[process_genome.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/process_genome.sh)
+
+For the following links:
 ```
-# example commands
-cd busco/genomes/
-
-# commands for these genomes
-curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_017639315.1/download?include_annotation_type=GENOME_FASTA
-curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_003369915.1/download?include_annotation_type=GENOME_FASTA
-curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_009650485.2/download?include_annotation_type=GENOME_FASTA
-curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_004354385.1/download?include_annotation_type=GENOME_FASTA
-curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_016746395.2/download?include_annotation_type=GENOME_FASTA
-curl -OJX GET https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCA_001014675.1/download?include_annotation_type=GENOME_FASTA
+https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_017639315.1/download?include_annotation_type=GENOME_FASTA
+https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_003369915.1/download?include_annotation_type=GENOME_FASTA
+https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_009650485.2/download?include_annotation_type=GENOME_FASTA
+https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_004354385.1/download?include_annotation_type=GENOME_FASTA
+https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCF_016746395.2/download?include_annotation_type=GENOME_FASTA
+https://api.ncbi.nlm.nih.gov/datasets/v2alpha/genome/accession/GCA_001014675.1/download?include_annotation_type=GENOME_FASTA
 ```
 
-Once you have downloaded the genome, unzip the downloaded folder and the genome will be the `.fna` file within `ncbi_dataset/data/[GCA#######_specific to species]`
-
-Then we can rename these genomes and delete the files we don't need.
-
-Typical genome naming is the first 3 letters of the genus followed by the first three letters of the specific epithet `Drosophila ananassae = DroAna.fa`
-
-A user would download genomes specific to their tree and rename them accordingly. Below is an example of using a move command to rename a genome downloaded.
+You should run this command:
 ```
-unzip ncbi_dataset.zip
+chmod 755 process_genome.sh    # makes file executable and only needs to be done once
+./process_genome.sh [GENOME_DOWNLOAD_URL]
+```
 
-# rename genome
-mv ncbi_dataset/data/GCF_017639315.1/GCF_017639315.1_ASM1763931v2_genomic.fna DroAna.fa
+---
 
-# delete extra files
-rm ncbi_dataset.zip
-rm -R ncbi_dataset
-rm README.md
+## Editing scripts
+For the scripts below, you will need to edit them to have your specific path to your files. You can do this manually or by using a `sed` command:
+- The `-i` specifies that this command should edit the file directly
+- The `\` is needed before every instance of `[`, `]`, or `/` in either the search string or the replacement string
+- Syntax for `sed` follows: `'s/SEARCH_STRING/REPLACEMENT_STRING/g'` (more info on sed [here](https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/))
+- The `-g` means that every instance of the search string will be replaced with the replacement string
+
+```
+# Example replacement usage
+sed -i 's/\[YOUR_PATH_HERE\]/\/projects\/f_geneva_1\/alyssa/g' test.sh
 ```
 
 ---
 
 ## Run BUSCO on all downloaded genomes
-- Now we will be running the `busco.sh` script linked below
-- You will need to edit these slurm files to be specific to your paths
-- The busco output files will be written to wherever you have this `busco.sh` script saved so make sure to save (and run) this script in your `busco_out/`
-- We will write a `busco.sh` script with the specific busco commands
-- We will also write a `run_busco.sh` loop script to loop through all of our genome files automatically
+- Now we will be running the `busco.sh` and `run_busco.sh` scripts linked below
+  - The `busco.sh` script below has the busco commands and the `run_busco.sh` script will run the `busco.sh` script on all your genome files.
+- You will need to edit these files to be specific to your paths
 - We will be using the `diptera_odb10` busco dataset, which will be downloaded from the busco online database
+
+### Download busco dataset
+- There are a couple different options for accessing the busco dataset
+  - The default is to use the `-l [dataset_name]` flag which will prompt busco to connect to their online server and download the most recent version of this dataset. The issue with this option is that busco frequently has issues connecting to the online server which causes the job to fail. Resubmitting normally fixes this issue.
+  - The second option is to download the dataset manually and either change the `-l` flag to contain the path to the dataset (e.g. `/my/own/path/vertebrata_odb10`) or just add the `--offline` flag to your busco command (with the `-l` flag only containing the dataset name). Making either of these changes will not allow busco to connect to the server to try and download a new version of the dataset.
+  ```
+  busco download [dataset_name]
+  ```
+- We will be using the **second option** in this tutorial:
+```
+cd busco_out/
+srun --partition=cmain --mem=10G --time=2:00:00 --ntasks-per-node=10 --pty bash
+conda activate busco
+busco --download diptera_odb10
+``` 
+
+### `busco.sh`
+- **Important:** The busco output files will be written to wherever you have this `busco.sh` script saved so make sure to save (and run) this script in whatever folder you want the output to be stored in
+- You will know busco has completed successfully when a `short_summary...txt` file is created in your busco output folder
 - This step should take 10-20 minutes per genome
-- You will know that busco completed successfully if in the output folder, a `short_summary...txt` file is created
 
 [busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/busco.sh)
 
-**You will need to do some editing of this loop file:**
+### `run_busco.sh`
+- **You will need to do some editing of this loop file:**
 - The `FILES=$(ls -1 [YOUR PATH HERE]/busco/genomes/*.fa | cut -d "/" -f 10 | sort)` line in this script will produce **output the genome names only**. For example, the output should look like:
   ```
   # running this line from the command line
@@ -135,32 +158,22 @@ rm README.md
   EphGra.fa
   ```
 - The cut command at the end of this line will be removing information from the path of the file to only keep the genome name. **You will need to alter this line to be specific to your file path**.
-- For my path, I needed to cut after 9 instances of "/" to only leave the file name. Your number will likely be different.
+- **Typical syntax for `cut`** (more info [here](https://www.geeksforgeeks.org/cut-command-linux-examples/)):
+  - `-d` specifies the delimiter that you will cut on (in this example we are using `/` as the delimiter)
+  - `-f` specifies how many instances of the delimiter to remove. You can have one number here (e.g. `cut -d "/" -f 2` will give you the string in between the first and second instances of `/`) or you can have a range (e.g. `cut -d "/" -f 2-3` will give you the string after the first `/` and before the third `/`)
+- For my path, I needed to cut after 9 instances of `/` to only leave the file name. Your number will likely be different.
 - You can run this `ls -1 [YOUR PATH HERE]/busco/genomes/*.fa | cut -d "/" -f 10 | sort` line in your terminal and **change the number after `-f`** to determine where you will need to cut to leave only the genome names.
 
 [run_busco.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/run_busco.sh)
 
 **run commands**
 - Once you have edited the file, you can uncomment the `eval $CMD` line so the script will submit our `busco.sh` script
-- I like to run the script with `echo $CMD` uncommented and the `eval $CMD` commented out first to make sure that it is submitting the `busco.sh` script correctly
+- I like to run the script first with `echo $CMD` uncommented and the `eval $CMD` commented out to make sure that it is submitting the `busco.sh` script correctly
 
 ```
 chmod 755 run_busco.sh       # makes this an executable file
 ./run_busco.sh
 ```
-
-### Troubleshooting
-Sometimes when running busco, the lineage files will not download properly and this will cause your busco run to fail. If this happens, just re-submitting the busco job should solve the problem as busco will re-try to download the lineage files. Before resubmitting, you need to **delete any output folders made from the previous run**.
-
-If simply resubmitting the job doesn't work you can do one of the options below:
-1. If the dataset has successfully downloaded for one of the other jobs, you can change the `-l` argument in your busco command to `-l /my/own/path/diptera_odb10`. This will force busco to use the already downloaded dataset and will prevent the program from trying to connect to the busco server and download the files again
-2. Again if the datset has successfully downloaded for one of the other jobs, you can leave the `-l` argument as `-l diptera_odb10` and add `--offline` to your busco command. This will prevent busco from connecting to the server and trying to download the files and will force the program to use the already downloaded files.
-3. If the dataset did not download properly for any jobs after resubmitting, then you can manually download the dataset using the commands below. Then follow either one of the options above.
-   ```
-   cd busco_out/
-   srun --partition=cmain --mem=10G --time=2:00:00 --ntasks-per-node=10 --pty bash
-   busco download diptera_odb10
-   ```
 
 ### BUSCO completeness results
 In each `short_summary...txt` file, you will find the completeness scores for that genome assembly. They should match the graph below (the graph below will not be produced with the busco code but the numbers should match).
@@ -171,19 +184,19 @@ In each `short_summary...txt` file, you will find the completeness scores for th
 
 ## Running busco_phylogenomics
 - Now that we have downloaded the genomes and run busco on all of them, we can perform phylogenetic analyses with busco_phylogenomics
-- First, we need to rename and move our busco results to our `phy_input/` folder to be in the format that busco_phylogenomics needs
+- First, we need our busco results to be in our `phy_input/` folder to be in the format that busco_phylogenomics needs
 - What we need to do here is to extract the `run_diptera_odb10/` folder for each species and put it in the format of `run_[species]/`
+- We will do this by soft-linking to our busco folder
+- In this file, **you will need to edit**:
+  - The `FILES=` line with your specific path and cut command (should be identical to the line in your `run_busco.sh`)
+  - Path for `INPUT_DIR`
+  - Path for `OUTDIR`
 
-[move.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/move.sh)
-
-**This loop file should be almost identical to your `run_busco.sh` file**
-- You will just need to change the `CMD=` line to be submitting the `move.sh` script instead of the `busco.sh` script
-
-[run_move.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/run_move.sh)
+[run_softlink.sh](https://github.com/alyssavanerelli/C4L_phylogenomics/blob/main/run_softlink.sh)
 
 ```
-chmod 755 run_move.sh       # makes this an executable file
-./run_move.sh
+chmod 755 run_softlink.sh       # makes this an executable file and only needs to be done once
+./run_softlink.sh
 ```
 
 **Now we can run busco_phylogenomics**
