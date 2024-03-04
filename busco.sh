@@ -20,6 +20,6 @@ echo "load variables"
 FASTA=$1
 
 echo "run busco"
-busco -i [YOUR PATH HERE]/busco/genomes/${FASTA} -c 16 -l diptera_odb10 -o ${FASTA} -m genome
+busco -i [YOUR PATH HERE]/busco/genomes/${FASTA} -c 16 -l diptera_odb10 -o ${FASTA} -m genome --offline
 
 echo "done"
